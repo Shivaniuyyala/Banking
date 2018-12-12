@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h5>Transaction History:</h5>
+    <div>
+        <table  class="table mb-0">
+            <thead>
+            <th>Transaction Id</th>
+            <th>Amount</th>
+            <th>Transaction type</th>
+            <th>Transaction Date</th>
+            </thead>
+            <tdoby>
+                {% for each in transactions %}
+                    <tr><td class="align-middle">{{ each.course.txn_id }}</td>
+                    <td class="align-middle">{{ each.amount }}</td>
+                    <td class="align-middle">{{ each.type }}</td>
+                    <td class="align-middle">{{ each.txn_date }}</td></tr>
+                {% endfor %}
+            </tdoby>
+        </table>
+    </div>
+</div>
+{% endblock %}

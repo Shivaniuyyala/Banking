@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from customer.models import BaseClass, User
 from django.utils.translation import ugettext_lazy as _
+import datetime
 
 
 class State(BaseClass):
@@ -22,7 +23,7 @@ class City(BaseClass):
 
 
 class Branch(BaseClass):
-    branch_code = models.CharField(max_length=50, unique=True)
+    branch_code = models.CharField(max_length=50, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
     city = models.ForeignKey(City)
 
@@ -31,7 +32,7 @@ class Branch(BaseClass):
 
 
 class Account(BaseClass):
-    ac_number = models.CharField(max_length=50, unique=True)
+    ac_number = models.CharField(max_length=50, unique=True, primary_key=True)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default="0.00")
     branch = models.ForeignKey(Branch)
 
@@ -61,6 +62,7 @@ class Transaction(BaseClass):
     customer = models.ForeignKey(User)
     account = models.ForeignKey(Account)
     type = models.PositiveSmallIntegerField(choices=TRANSACTION_TYPES, default=1)
+    txn_date = models.DateTimeField(editable=False, default=datetime.datetime.now)
 
     def __unicode__(self):
         return u'%s' % self.txn_id

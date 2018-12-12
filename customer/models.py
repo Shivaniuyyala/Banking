@@ -42,11 +42,11 @@ class BaseClass(models.Model):
 #         return u'%s' % self.user.username
 
 class Beneficiary(BaseClass):
-    customer = models.ForeignKey(User)
-    Beneficiary = models.ManyToManyField(User)
+    user = models.OneToOneField(User, related_name='account_user')
+    beneficiary = models.ManyToManyField(User)
 
     def __unicode__(self):
-        return u'%s' % self.customer.username
+        return u'%s' % self.user.username
 
 
 
