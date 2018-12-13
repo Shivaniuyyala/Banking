@@ -3,16 +3,23 @@
 {% block content %}
 <div>
     <form enctype="multipart/form-data" method='post' action=''>
-        <p>{{ form.errors }}</p>
-        <p>{{ form.non_field_errors }}</p>
         {% csrf_token %}
             <table class="table mb-0">
                 <h5> Transfer Amount: </h5>
-            {{form.as_table}}
-                </table>
-            <table>
-            <tr><td> <input type='submit' value='Transfer Amount' class="btn btn-primary" /> </td></tr>
-            </table>
+            <thead>
+            <th>Beneficiary Name</th>
+            <th>Account Number</th>
+            <th>Action</th>
+            </thead>
+            <tdoby>
+                {% for each in beneficiary_list %}
+                    <tr>
+                        <td class="align-middle">{{ each.customer.username }}</td>
+                        <td class="align-middle">{{ each.account }}</td>
+                        <td class="align-middle"><a href="{% url 'customer:txn_confirm' beneficiary_id=each.id  %}">transfer</a></td></tr>
+                {% endfor %}
+            </tdoby>
+        </table>
     </form>
 </div>
 {% endblock %}

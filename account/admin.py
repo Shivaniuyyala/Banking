@@ -31,8 +31,14 @@ class CustomerAccountMappingAdmin(admin.ModelAdmin):
 
 
 class TransactionAdmin(admin.ModelAdmin):
-    model = CustomerAccountMapping
+    model = Transaction
     list_display = ('txn_id', 'amount', 'customer', 'account', 'type')
+
+
+class BeneficiaryAdmin(admin.ModelAdmin):
+    model = Beneficiary
+    list_display = ('user',)
+    filter_horizontal = ('beneficiary', )
 
 
 admin.site.register(State, StateAdmin)
@@ -41,3 +47,5 @@ admin.site.register(Branch, BranchAdmin)
 admin.site.register(Account, AccountAdmin)
 admin.site.register(CustomerAccountMapping, CustomerAccountMappingAdmin)
 admin.site.register(Transaction, TransactionAdmin)
+admin.site.register(Beneficiary, BeneficiaryAdmin)
+

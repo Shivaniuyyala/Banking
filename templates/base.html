@@ -34,7 +34,7 @@
                       <a href="{% url 'home' %}" class="btn btn-primary" style="width:50%" role="button">Account Summary</a>
                       <a href="{% url 'customer:add_beneficiary' %}" class="btn btn-primary" style="width:50%" role="button">Add Beneficiary</a>
                       <a href="{% url 'customer:transfer_amount' %}" class="btn btn-primary" style="width:50%" role="button">Transfer amount</a>
-                      <a href="{% url 'login' %}" class="btn btn-primary" style="width:50%" role="button">Future Balance</a>
+                      <a href="{% url 'customer:calculate_interest' %}" class="btn btn-primary" style="width:50%" role="button">Future Balance</a>
                     </div>
                     {% endif %}
                   {% endif %}

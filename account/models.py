@@ -67,3 +67,11 @@ class Transaction(BaseClass):
     def __unicode__(self):
         return u'%s' % self.txn_id
 
+
+class Beneficiary(BaseClass):
+    user = models.OneToOneField(User, related_name='account_user')
+    beneficiary = models.ManyToManyField(CustomerAccountMapping)
+
+    def __unicode__(self):
+        return u'%s' % self.user.username
+

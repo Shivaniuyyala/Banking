@@ -41,12 +41,7 @@ class BaseClass(models.Model):
 #     def __unicode__(self):
 #         return u'%s' % self.user.username
 
-class Beneficiary(BaseClass):
-    user = models.OneToOneField(User, related_name='account_user')
-    beneficiary = models.ManyToManyField(User)
 
-    def __unicode__(self):
-        return u'%s' % self.user.username
 
 
 

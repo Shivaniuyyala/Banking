@@ -29,6 +29,7 @@ class AddBeneficiaryForm(forms.Form):
 
 
 class TransferAmountForm(forms.Form):
+    amount = forms.DecimalField(required=True)
 
     def __init__(self, *args, **kwargs):
         super(TransferAmountForm, self).__init__(*args, **kwargs)
