@@ -22,30 +22,24 @@ class BranchAdmin(admin.ModelAdmin):
 
 class AccountAdmin(admin.ModelAdmin):
     model = Account
-    list_display = ('ac_number', 'branch', 'balance')
-
-
-class CustomerAccountMappingAdmin(admin.ModelAdmin):
-    model = CustomerAccountMapping
-    list_display = ('customer', 'account', 'status')
+    list_display = ('ac_number', 'ac_holder', 'branch', 'balance', 'status')
 
 
 class TransactionAdmin(admin.ModelAdmin):
     model = Transaction
-    list_display = ('txn_id', 'amount', 'customer', 'account', 'type')
+    list_display = ('id', 'amount', 'from_account', 'to_account', 'type', 'txn_date')
+    list_filter = ('txn_date', )
 
 
-class BeneficiaryAdmin(admin.ModelAdmin):
-    model = Beneficiary
-    list_display = ('user',)
-    filter_horizontal = ('beneficiary', )
+class BeneficiaryAccountDetailsAdmin(admin.ModelAdmin):
+    model = BeneficiaryAccountDetails
+    list_display = ('user', 'Beneficiary_account', 'transfer_limit')
 
 
 admin.site.register(State, StateAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(Branch, BranchAdmin)
 admin.site.register(Account, AccountAdmin)
-admin.site.register(CustomerAccountMapping, CustomerAccountMappingAdmin)
 admin.site.register(Transaction, TransactionAdmin)
-admin.site.register(Beneficiary, BeneficiaryAdmin)
+admin.site.register(BeneficiaryAccountDetails, BeneficiaryAccountDetailsAdmin)
 

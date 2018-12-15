@@ -7,13 +7,17 @@
         <table  class="table mb-0">
             <thead>
             <th>Transaction Id</th>
+            <th>Payee</th>
+            <th>Payee Account</th>
             <th>Amount</th>
             <th>Transaction type</th>
             <th>Transaction Date</th>
             </thead>
             <tdoby>
                 {% for each in transactions %}
-                    <tr><td class="align-middle">{{ each.course.txn_id }}</td>
+                    <tr><td class="align-middle">{{ each.id }}</td>
+                        <td class="align-middle">{{ each.to_account.ac_holder }}</td>
+                        <td class="align-middle">{{ each.to_account.ac_number }}</td>
                     <td class="align-middle">{{ each.amount }}</td>
                     <td class="align-middle">{{ each.type }}</td>
                     <td class="align-middle">{{ each.txn_date }}</td></tr>

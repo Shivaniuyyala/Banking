@@ -9,9 +9,9 @@ import datetime
 
 class User(AbstractUser):
     is_customer = models.BooleanField(blank=True, default=False)
-    mobile_number = models.CharField(_("Mobile Number"), max_length=15)
-    # pan_number = models.CharField(_("PAN Number"), max_length=20)
-    # aadhar_number = models.CharField(_("Aadhar Number"), max_length=4)
+    mobile_number = models.CharField(_("Mobile Number"), max_length=10)
+    pan_number = models.CharField(_("PAN Number"), max_length=10, default=True, null=True)
+    aadhar_number = models.CharField(_("Aadhar Number"), max_length=20, default=True, null=True)
 
     def __unicode__(self):
         return u'%s' % self.username
@@ -31,15 +31,6 @@ class BaseClass(models.Model):
     @classmethod
     def table_name(cls):
         return cls._meta.db_table
-
-
-# class CustomerInfo(BaseClass):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-#     pan_number = models.CharField(_("PAN Number"), max_length=20)
-#     aadhar_number = models.CharField(_("Aadhar Number"), max_length=40)
-#
-#     def __unicode__(self):
-#         return u'%s' % self.user.username
 
 
 

@@ -14,9 +14,9 @@
             <tdoby>
                 {% for each in beneficiary_list %}
                     <tr>
-                        <td class="align-middle">{{ each.customer.username }}</td>
-                        <td class="align-middle">{{ each.account }}</td>
-                        <td class="align-middle"><a href="{% url 'customer:txn_confirm' beneficiary_id=each.id  %}">transfer</a></td></tr>
+                        <td class="align-middle">{{ each.Beneficiary_account.ac_holder }}</td>
+                        <td class="align-middle">{{ each.Beneficiary_account_id }}</td>
+                        <td class="align-middle"><a href="{% url 'customer:txn_confirm' ac_number=each.Beneficiary_account_id  %}">transfer</a></td></tr>
                 {% endfor %}
             </tdoby>
         </table>

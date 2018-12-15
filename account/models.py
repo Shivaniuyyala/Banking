@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from customer.models import BaseClass, User
-from django.utils.translation import ugettext_lazy as _
 import datetime
 
 
@@ -23,7 +23,7 @@ class City(BaseClass):
 
 
 class Branch(BaseClass):
-    branch_code = models.CharField(max_length=50, unique=True, primary_key=True)
+    branch_code = models.CharField(max_length=10, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
     city = models.ForeignKey(City)
 
@@ -32,45 +32,40 @@ class Branch(BaseClass):
 
 
 class Account(BaseClass):
-    ac_number = models.CharField(max_length=50, unique=True, primary_key=True)
+    ac_number = models.CharField(max_length=20, unique=True, primary_key=True)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default="0.00")
-    branch = models.ForeignKey(Branch)
-
-    def __unicode__(self):
-        return u'%s' % self.ac_number
-
-
-class CustomerAccountMapping(BaseClass):
-    customer = models.ForeignKey(User)
-    account = models.ForeignKey(Account)
+    branch = models.ForeignKey(Branch, blank=True, null=True)
+    ac_holder = models.ForeignKey(User)
     status = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return u'%s-%s' % (self.customer, self.account)
+        return u'%s-%s' % (self.ac_holder, self.ac_number)
 
 
 class Transaction(BaseClass):
-    CREDIT = 1
-    DEBIT = 2
+    CREDIT = 'credit'
+    DEBIT = 'debit'
     TRANSACTION_TYPES = (
         (CREDIT, 'credit'),
         (DEBIT, 'debit'),
     )
-
-    txn_id = models.IntegerField(_("Transaction ID"))
+    user = models.ForeignKey(User)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default="0.00")
-    customer = models.ForeignKey(User)
-    account = models.ForeignKey(Account)
-    type = models.PositiveSmallIntegerField(choices=TRANSACTION_TYPES, default=1)
+    from_account = models.ForeignKey(Account, related_name='payer_account')
+    to_account = models.ForeignKey(Account, related_name='payee_account')
+    type = models.CharField(choices=TRANSACTION_TYPES, default=CREDIT, max_length=50)
     txn_date = models.DateTimeField(editable=False, default=datetime.datetime.now)
 
     def __unicode__(self):
-        return u'%s' % self.txn_id
+        return u'%s' % self.id
 
 
-class Beneficiary(BaseClass):
-    user = models.OneToOneField(User, related_name='account_user')
-    beneficiary = models.ManyToManyField(CustomerAccountMapping)
+class BeneficiaryAccountDetails(BaseClass):
+    user = models.ForeignKey(User)
+    Beneficiary_account = models.ForeignKey(Account)
+    transfer_limit = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0),
+                                                                                      MaxValueValidator(100000)],
+                                         default=100000)
 
     def __unicode__(self):
         return u'%s' % self.user.username
