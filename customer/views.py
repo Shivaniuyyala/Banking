@@ -10,6 +10,7 @@ from django.db import transaction
 from customer.models import User
 from account.models import *
 from customer.forms import SignUpForm, AddBeneficiaryForm, TransferAmountForm
+from account.decorators import login_required
 from decimal import Decimal
 import datetime
 
@@ -35,6 +36,7 @@ class SignUpView(CreateView):
         return redirect('home')
 
 
+@login_required
 def HomePage(request):
     if request.method == "GET":
         username = request.user.username
@@ -42,6 +44,7 @@ def HomePage(request):
         return render(request, 'home.html', {"accounts": accounts, "username": username})
 
 
+@login_required
 def TransactionHistory(request, ac_number=None):
     if request.method == "GET":
         transactions = Transaction.objects.filter(user=request.user)
@@ -51,6 +54,7 @@ def TransactionHistory(request, ac_number=None):
 class AddBeneficiary(CreateView):
     template_name = 'add_beneficiary.html'
 
+    @login_required
     def get_context_data(self, **kwargs):
         return super(AddBeneficiary, self).get_context_data(**kwargs)
 
@@ -82,6 +86,7 @@ class AddBeneficiary(CreateView):
 class TransferAmountConfirm(CreateView):
     template_name = 'transfer_amount_confirm.html'
 
+    @login_required
     def get_context_data(self, **kwargs):
         return super(TransferAmountConfirm, self).get_context_data(**kwargs)
 
@@ -121,13 +126,13 @@ class TransferAmountConfirm(CreateView):
             payee_ac = Account.objects.select_for_update().get(ac_number=payee_ac_number)
             payee_ac.balance += amount
             payee_ac.save()
-            # need some changes here
             Transaction.objects.create(user=payer, amount=amount, from_account=payer_ac, to_account=payee_ac,
                                        type=Transaction.DEBIT, txn_date=datetime.datetime.now())
             Transaction.objects.create(user=payee, amount=amount, from_account=payer_ac, to_account=payee_ac,
                                        type=Transaction.CREDIT, txn_date=datetime.datetime.now())
 
 
+@login_required
 def transferAmount(request):
     template_name = 'transfer_amount.html'
     if request.method == "GET":
@@ -135,6 +140,7 @@ def transferAmount(request):
         beneficiary_list = list(BeneficiaryAccountDetails.objects.filter(user=user))
         return render(request, template_name, {'beneficiary_list': beneficiary_list})
 
+@login_required
 def interestCalculation(request):
     template_name = 'view_interest.html'
     interest_rate = 4
