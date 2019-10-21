@@ -77,7 +77,7 @@ djorm-ext-pool==0.5
 dnspython==1.15.0
 dogslow==0.9.5
 duplicity==0.6.23
-ecdsa==0.11
+ecdsa==0.13.3
 elasticsearch==2.3.0
 enum34==1.1.6
 feedparser==5.2.1
