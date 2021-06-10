@@ -2,7 +2,7 @@ BeautifulSoup==3.2.1
 Cheetah==2.4.4
 ConcurrentLogHandler==0.9.1
 Cython==0.20.2
-Django==1.11
+Django==2.2.24
 Fabric==1.12.0
 M2Crypto==0.25.1
 Markdown==2.6.7
