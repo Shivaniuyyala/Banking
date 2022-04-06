@@ -16,7 +16,7 @@ SQLAlchemy==1.0.15
 SecretStorage==2.3.1
 Shapely==1.5.17
 South==0.7.6
-Twisted==16.4.1
+Twisted==22.2.0
 Twisted-Core==13.2.0
 Twisted-Web==13.2.0
 XlsxWriter==0.9.3
