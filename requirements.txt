@@ -152,7 +152,7 @@ pyxdg==0.25
 pyzbar==0.1.7
 readline==6.2.4.1
 redis==2.10.3
-reportlab==3.0
+reportlab==3.5.55
 repoze.lru==0.6
 requests==2.2.1
 requests-aws4auth==0.9
