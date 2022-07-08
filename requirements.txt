@@ -169,7 +169,7 @@ spyne==2.10.9
 ssh-import-id==3.21
 stemming==1.0.1
 stevedore==1.18.0
-suds==0.4
+suds==1.0.0
 superlance==0.7
 supervisor==3.0a8
 system-service==0.1.6
