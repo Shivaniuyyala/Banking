@@ -143,7 +143,7 @@ python-dateutil==2.1
 python-debian==0.1.21-nmu2ubuntu2
 python-distutils-extra==2.38
 python-etcd==0.4.3
-python-jwt==1.2.1
+python-jwt==3.3.4
 python-logstash==0.4.2
 python-memcached==1.48
 python-ptrace==0.6.4
