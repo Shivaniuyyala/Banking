@@ -40,7 +40,7 @@ boto-rsync==0.8.1
 botocore==1.4.93
 ccsm==0.9.11.3
 celery==3.1.16
-certifi==2018.10.15
+certifi==2022.12.7
 cffi==1.10.0
 chardet==2.0.1
 clint==0.5.1
